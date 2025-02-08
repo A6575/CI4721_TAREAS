@@ -17,10 +17,9 @@
 		```bash
 		py -m pip install parsec
 		```
-	> [!IMPORTANT]
-	> Esta librería es compatible con `Python 2. 7` hasta `Python 3.12`.
-
 	Para más detalles sobre el uso de la librería, visite la [Documentación Oficial](https://pythonhosted.org/parsec/documentation.html).
+> [!IMPORTANT]
+> Esta librería es compatible con `Python 2. 7` hasta `Python 3.12`.
 	
 ### Ejecución
 
