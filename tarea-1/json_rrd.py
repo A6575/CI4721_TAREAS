@@ -133,4 +133,4 @@ J = J_obj | J_array
 Produccion:
     S -> J  
 """
-S = whitespace >> J
+S = whitespace >> J << eof()
