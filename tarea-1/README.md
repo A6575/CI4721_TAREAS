@@ -18,9 +18,18 @@
 		py -m pip install parsec
 		```
 	Para más detalles sobre el uso de la librería, visite la [Documentación Oficial](https://pythonhosted.org/parsec/documentation.html).
+
 > [!IMPORTANT]
-> Esta librería es compatible con `Python 2. 7` hasta `Python 3.12`.
+> Esta librería es compatible desde `Python 2.7` hasta `Python 3.12`.
 	
 ### Ejecución
-
+Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente comando:
+- Unix/macOs
+	```bash
+	python3 main.py <nombre_archivo.json>
+	```
+- Windows
+  ```bash
+  py main.py <nombre_archivo.json>
+  ```
 ### Ejemplos
