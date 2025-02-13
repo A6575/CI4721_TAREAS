@@ -21,6 +21,18 @@
 
 > [!IMPORTANT]
 > Esta librería es compatible desde `Python 2.7` hasta `Python 3.12`.
+
+> [!WARNING]
+> **EN CASO DE PROBLEMAS CON LA INSTALACIÓN (`error: externally-managed-environment`)**
+> 1. Crear un enviroment con el siguiente comando
+> ```bash
+> python3 -m venv env
+> ```
+> 2. Activar el environment con
+> ```bash
+> source env/bin/activate
+> ```
+> Luego, realice la instalación respectiva.
 	
 ### Ejecución
 Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente comando:
@@ -32,4 +44,6 @@ Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente co
   ```bash
   py main.py <nombre_archivo.json>
   ```
+> [!WARNING]
+> En caso de haber necesitado crear un entorno virtual para instalar la librería, asegúrese de activar el mismo antes de ejecutar el programa
 ### Ejemplos
