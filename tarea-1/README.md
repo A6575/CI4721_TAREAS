@@ -1,7 +1,15 @@
 # Tarea 1 - LL y LR: Pregunta 1.b
 
 *«Implemente un reconocedor recursivo descendente para su gramática libre de contexto que genere frases correctas en `JSON`, usando una herramienta basada en **parsec** (información disponible en: https://en.wikipedia.org/wiki/Parsec_(parser)). Puede utilizar el lenguaje de su elección, siempre y cuando tenga una implementación oficial de **parsec** disponible.»*
-
+## Sobre la instalación
+1. Clone el repositorio:
+	```bash
+	git clone https://github.com/A6575/CI4721_TAREAS.git
+	```
+2. Ir a la carpeta `tarea-1/`
+	```bash
+	cd ~/CI4721_TAREAS/tarea-1
+	```
 ## Sobre la Implementación
 
 ### Prerequisitos
@@ -47,3 +55,4 @@ Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente co
 > [!WARNING]
 > En caso de haber necesitado crear un entorno virtual para instalar la librería, asegúrese de activar el mismo antes de ejecutar el programa
 ### Ejemplos
+Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpeta `test/`
