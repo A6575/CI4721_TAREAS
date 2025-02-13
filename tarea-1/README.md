@@ -46,13 +46,35 @@
 Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente comando:
 - Unix/macOs
 	```bash
-	python3 main.py <nombre_archivo.json>
+	python3 main.py <tests/nombre_archivo.json>
 	```
 - Windows
   ```bash
-  py main.py <nombre_archivo.json>
+  py main.py <tests/nombre_archivo.json>
   ```
 > [!WARNING]
 > En caso de haber necesitado crear un entorno virtual para instalar la librería, asegúrese de activar el mismo antes de ejecutar el programa
 ### Ejemplos
-Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpeta `test/`
+Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpeta `tests/`
+
+- #### Caso de éxito
+  El programa indicará que el archivo pasado es un `JSON valido`, para luego mostrar el contenido parseado. Se tiene en cuenta que:
+  - Los números, tanto enteros como floats, son transformados a un `float`
+  - `true` y `false` seran transformados a `True` y `False`, respectivamente
+  - `null` sera transformado a `None`
+  
+  <u><strong>Archivos que son caso de éxito</strong></u>:
+  - `prueba-1.json`
+  - `prueba-2.json`
+  - `prueba-6.json`
+  - `prueba-8.json`
+- #### Caso de fallo
+  El programa indicará que el archivo tiene un error, mostrando ubicación y el posible conflicto
+
+  <u><strong>Archivos que son caso de fallo</strong></u>:
+  - `prueba-3.json`
+  - `prueba-4.json`
+  - `prueba-5.json`
+  - `prueba-7.json`
+> [!IMPORTANT]
+> Para casos como el encontrado en `prueba-5.json`, el programa reportará un error `EOF`
