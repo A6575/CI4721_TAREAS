@@ -94,7 +94,7 @@ Se tuvo que realizar la implementación instanciando $X$ en $A$. Es decir
 
 $$
 \begin{array}{ccl}
-X & \rightarrow & VA\$ \\
+X & \rightarrow & VA \\
 A & \rightarrow & ,VA \\
   &  |  & \lambda
 \end{array}
