@@ -53,15 +53,15 @@ Para ejecutar el programa debe ejecutar el archivo `main.py` con el siguiente co
   py main.py <tests/nombre_archivo.json>
   ```
 > [!WARNING]
-> En caso de haber necesitado crear un entorno virtual para instalar la librería, asegúrese de activar el mismo antes de ejecutar el programa
+> En caso de haber necesitado crear un entorno virtual para instalar la librería, asegúrese de activar el mismo antes de ejecutar el programa.
 ### Ejemplos
 Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpeta `tests/`
 
 - #### Caso de éxito
-  El programa indicará que el archivo pasado es un `JSON valido`, para luego mostrar el contenido parseado. Se tiene en cuenta que:
-  - Los números, tanto enteros como floats, son transformados a un `float`
-  - `true` y `false` seran transformados a `True` y `False`, respectivamente
-  - `null` sera transformado a `None`
+  El programa indicará que el archivo pasado es un `JSON válido`, para luego mostrar el contenido parseado. Se tiene en cuenta que:
+  - Los números, tanto enteros como floats, son transformados a un `float`.
+  - `true` y `false` serán transformados a `True` y `False`, respectivamente.
+  - `null` será transformado a `None`.
   
   <u><strong>Archivos que son caso de éxito</strong></u>:
   - `prueba-1.json`
@@ -69,7 +69,7 @@ Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpet
   - `prueba-6.json`
   - `prueba-8.json`
 - #### Caso de fallo
-  El programa indicará que el archivo tiene un error, mostrando ubicación y el posible conflicto
+  El programa indicará que el archivo tiene un error, mostrando ubicación y el posible conflicto.
 
   <u><strong>Archivos que son caso de fallo</strong></u>:
   - `prueba-3.json`
@@ -77,4 +77,27 @@ Los casos de ejemplo con el que se realizaron pruebas se encuentran en la carpet
   - `prueba-5.json`
   - `prueba-7.json`
 > [!IMPORTANT]
-> Para casos como el encontrado en `prueba-5.json`, el programa reportará un error `EOF`
+> Para casos como el encontrado en `prueba-5.json`, el programa reportará un error `EOF`.
+
+### Notas
+Para la producción $A$,
+
+$$
+\begin{array}{ccl}
+X & \rightarrow & VA \\
+A & \rightarrow & ,X \\
+  &  |  & \lambda
+\end{array}
+$$
+
+Se tuvo que realizar la implementación instanciando $X$ en $A$. Es decir
+
+$$
+\begin{array}{ccl}
+X & \rightarrow & VA\$ \\
+A & \rightarrow & ,VA \\
+  &  |  & \lambda
+\end{array}
+$$
+
+Debido a conflictos con el orden de definiciones de las producciones en Python
