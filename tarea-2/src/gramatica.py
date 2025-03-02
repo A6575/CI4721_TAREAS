@@ -19,13 +19,13 @@ class Grammar:
 
 			- set_start_symbol: establece el simbolo inicial de 
 								la gramatica.
-								
+
 			- set_precedence: establece la precedencia entre dos
 							  simbolos no terminales.
 	"""
-	start_symbol: str = field(default_factory=str)
-	rules: dict[str, list[str]] = field(default_factory=dict)
-	precedence: dict[t.Tuple[str,str], str] = field(default_factory=dict)
+	_start_symbol: str = field(default_factory=str)
+	_rules: dict[str, list[str]] = field(default_factory=dict)
+	_precedence: dict[t.Tuple[str,str], str] = field(default_factory=dict)
 
 	def add_rule(self, non_terminal: str, production: str) -> str:
 		if non_terminal.isupper():
