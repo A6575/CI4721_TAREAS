@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import typing as t
+from .precedencia import Precedence
 
 @dataclass
 class Grammar:
@@ -23,9 +24,9 @@ class Grammar:
 			- set_precedence: establece la precedencia entre dos
 							  simbolos no terminales.
 	"""
-	_start_symbol: str = field(default_factory=str)
+	_start_symbol: str = ""
 	_rules: dict[str, list[str]] = field(default_factory=dict)
-	_precedence: dict[t.Tuple[str,str], str] = field(default_factory=dict)
+	_precedence: Precedence = field(default_factory=Precedence)
 
 	def is_terminal_symbol(self, symbol: str) -> bool:
 		# Verificar que todos los caracteres sean ASCII, que la cadena no contenga '$',
@@ -36,9 +37,9 @@ class Grammar:
 				not any(char.isupper() for char in symbol) and
 				not any(char.isdigit() for char in symbol))
 	
-	def is_valid_production(self, non_terminal: str, production: str) -> bool:
+	def is_valid_production(self, non_terminal: str, production: list) -> bool:
 		# Verificar si es una producción vacía (lambda)
-		if production == "":
+		if production == []:
 			# Solo el símbolo inicial puede generar lambda
 			return non_terminal == self._start_symbol
 		
@@ -56,33 +57,36 @@ class Grammar:
 		
 		return True
 
-	def add_rule(self, non_terminal: str, production: str) -> str:
-		if not self.is_terminal_symbol(non_terminal) and self.is_valid_production(non_terminal, production):
-			self.rules.setdefault(non_terminal, []).append(production)
-			return f"{non_terminal} -> {production}"
+	def add_rule(self, non_terminal: str, production: list) -> str:
+		is_non_terminal = not self.is_terminal_symbol(non_terminal)
+		is_valid_production = self.is_valid_production(non_terminal, production)
+		
+		if is_non_terminal and is_valid_production:
+			self._rules.setdefault(non_terminal, []).append(production)
+			return f"Regla \"{non_terminal} -> {' '.join(production)}\" agregada a la gramatica"
 		else:
-			raise Exception(f"ERROR: '{non_terminal}' no es un símbolo no-terminal válido.")
+			if not is_non_terminal:
+				raise Exception(f"ERROR: '{non_terminal}' no es un símbolo no-terminal válido.")
+			
+			if not is_valid_production:
+				raise Exception(f"ERROR: '{production}' no es una produccion valida para una gramatica de operadores")
 	
 	def set_start_symbol(self, non_terminal: str) -> str:
 		if not self.is_terminal_symbol(non_terminal):
-			self.set_start_symbol = non_terminal
+			self._start_symbol = non_terminal
 			return f"{non_terminal} ahora es el simbolo inicial"
 		else:
 			raise Exception(f"ERROR: '{non_terminal}' no es un símbolo no-terminal válido.")
 	
-	def set_precedence(self, left:str, op:str, right:str) -> str:
+	def set_precedence_in_grammar(self, left:str, op:str, right:str) -> str:
 		if op in ("<", "=", ">") and self.is_terminal_symbol(left) and self.is_terminal_symbol(right):
-			self.precedence[(left, right)] = op
-			return "precedencia establecida"
+			return self._precedence.set_precedence(left, right, op)
 		else:
 			raise Exception(f"ERROR: '{op}' no es un operador válido (use <, > o =).")
-		
-	def is_defined_precedence(self, key: tuple) -> bool:
-		return key in self._precedence
-	
-	def get_precedence(self, key: tuple) -> bool:
-		return self._precedence[key]
-	
-	def get_rules(self):
+
+	def get_rules(self) -> dict:
 		return self._rules.item()
+
+	def build_grammar(self):
+		self._precedence.construir_fg()
 	
