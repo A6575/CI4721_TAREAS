@@ -5,9 +5,18 @@ import typing as t
 
 @dataclass
 class AnalizadorSintactico:
+	"""
+		Clase para manejar el analizador sintactico. (Programa principal)
+
+		Atributos
+			- _grammar: gramatica del analizador sintactico
+
+			- _parser: parser del analizador sintactico
+	"""
 	_grammar: Grammar = field(default_factory=Grammar)
 	_parser: Parser = field(default=Parser(_grammar))
 
+	# funcion para correr el programa
 	def run(self):
 		while True:
 			command = input("$> ").strip()
@@ -42,10 +51,14 @@ class AnalizadorSintactico:
 				except Exception as e:
 					print(e)
 			elif action == "BUILD":
-				print("Analizador construido.")
+				try:
+					f, g = self._grammar.build_grammar()
+					self._parser.set_fg(f, g)
+				except Exception as e:
+					print(e)
 			elif action == "PARSE":
 				print(parts)
-				self._parser.parse(parts[1])
+				#self._parser.parse(parts[1])
 			elif action == "EXIT":
 				print("Saliendo del programa.")
 				break

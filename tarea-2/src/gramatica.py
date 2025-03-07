@@ -28,6 +28,7 @@ class Grammar:
 	_rules: dict[str, list[str]] = field(default_factory=dict)
 	_precedence: Precedence = field(default_factory=Precedence)
 
+	# funcion para verificar que un terminal sea valido
 	def is_terminal_symbol(self, symbol: str) -> bool:
 		# Verificar que todos los caracteres sean ASCII, que la cadena no contenga '$',
 		# que no tenga letras mayúsculas ni números
@@ -37,6 +38,7 @@ class Grammar:
 				not any(char.isupper() for char in symbol) and
 				not any(char.isdigit() for char in symbol))
 	
+	# funcion para verificar que una produccion sea valida
 	def is_valid_production(self, non_terminal: str, production: list) -> bool:
 		# Verificar si es una producción vacía (lambda)
 		if production == []:
@@ -57,6 +59,7 @@ class Grammar:
 		
 		return True
 
+	# funcion para agregar una regla a la gramatica
 	def add_rule(self, non_terminal: str, production: list) -> str:
 		is_non_terminal = not self.is_terminal_symbol(non_terminal)
 		is_valid_production = self.is_valid_production(non_terminal, production)
@@ -71,6 +74,7 @@ class Grammar:
 			if not is_valid_production:
 				raise Exception(f"ERROR: '{production}' no es una produccion valida para una gramatica de operadores")
 	
+	# funcion para establecer el simbolo inicial de la gramatica
 	def set_start_symbol(self, non_terminal: str) -> str:
 		if not self.is_terminal_symbol(non_terminal):
 			self._start_symbol = non_terminal
@@ -78,15 +82,26 @@ class Grammar:
 		else:
 			raise Exception(f"ERROR: '{non_terminal}' no es un símbolo no-terminal válido.")
 	
+	# funcion para establecer la precedencia entre dos simbolos no terminales
 	def set_precedence_in_grammar(self, left:str, op:str, right:str) -> str:
 		if op in ("<", "=", ">") and self.is_terminal_symbol(left) and self.is_terminal_symbol(right):
 			return self._precedence.set_precedence(left, right, op)
 		else:
 			raise Exception(f"ERROR: '{op}' no es un operador válido (use <, > o =).")
-
+	
+	# funcion para obtener la precedencia entre dos simbolos no terminales
+	def get_precedence_in_grammar(self, left:str, right:str) -> str:
+		return self._precedence.get_precedence((left, right))
+	
+	# funcion para obtener las reglas de la gramatica
 	def get_rules(self) -> dict:
 		return self._rules.item()
 
+	# funcion para construir la gramatica
 	def build_grammar(self):
-		self._precedence.construir_fg()
+		return self._precedence.construir_fg()
+	
+	# funcion para verificar si un simbolo no terminal tiene precedencia definida
+	def is_defined_precedence_in_grammar(self, key):
+		return self._precedence.is_defined_precedence(key)
 	
